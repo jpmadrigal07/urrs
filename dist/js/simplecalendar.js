@@ -211,7 +211,14 @@ var calendar = {
 				$('.day-event').slideUp('fast');
 				var monthEvent = $(this).attr('date-month');
 				var dayEvent = $(this).text();
-				$('.day-event[date-month="' + monthEvent + '"][date-day="' + dayEvent + '"]').slideDown('fast');
+				$('.date-options').slideDown();
+				$('#month').val(monthEvent);
+				$('#day').val(dayEvent);
+				$('#year').val("2018");
+				var datepicked = monthEvent+"/"+dayEvent+"/"+"2018";
+				$('#date-selected').html(moment(datepicked).format('MMMM DD, YYYY'));
+				$('#wholedate').val(moment(datepicked).format('MMMM DD, YYYY'));
+				// $('.day-event[date-month="' + monthEvent + '"][date-day="' + dayEvent + '"]').slideDown('fast');
 			});
 		};
 
@@ -219,54 +226,54 @@ var calendar = {
 		 * Close day-event
 		 */
 		$('.close').on('click', function(e) {
-			$(this).parent().slideUp('fast');
+			$('.date-options').slideUp('fast');
 		});
 
 		/**
 		 * Save & Remove to/from personal list
 		 */
-		$('.save').click(function() {
-			if (this.checked) {
-				$(this).next().text('Remove from personal list');
-				var eventHtml = $(this).closest('.day-event').html();
-				var eventMonth = $(this).closest('.day-event').attr('date-month');
-				var eventDay = $(this).closest('.day-event').attr('date-day');
-				var eventNumber = $(this).closest('.day-event').attr('data-number');
-				$('.person-list').append('<div class="day" date-month="' + eventMonth + '" date-day="' + eventDay + '" data-number="' + eventNumber + '" style="display:none;">' + eventHtml + '</div>');
-				$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"]').slideDown('fast');
-				$('.day').find('.close').remove();
-				$('.day').find('.save').removeClass('save').addClass('remove');
-				$('.day').find('.remove').next().addClass('hidden-print');
-				remove();
-				sortlist();
-			} else {
-				$(this).next().text('Save to personal list');
-				var eventMonth = $(this).closest('.day-event').attr('date-month');
-				var eventDay = $(this).closest('.day-event').attr('date-day');
-				var eventNumber = $(this).closest('.day-event').attr('data-number');
-				$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').slideUp('slow');
-				setTimeout(function() {
-					$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').remove();
-				}, 1500);
-			}
-		});
+		// $('.save').click(function() {
+		// 	if (this.checked) {
+		// 		$(this).next().text('Remove from personal list');
+		// 		var eventHtml = $(this).closest('.day-event').html();
+		// 		var eventMonth = $(this).closest('.day-event').attr('date-month');
+		// 		var eventDay = $(this).closest('.day-event').attr('date-day');
+		// 		var eventNumber = $(this).closest('.day-event').attr('data-number');
+		// 		$('.person-list').append('<div class="day" date-month="' + eventMonth + '" date-day="' + eventDay + '" data-number="' + eventNumber + '" style="display:none;">' + eventHtml + '</div>');
+		// 		$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"]').slideDown('fast');
+		// 		$('.day').find('.close').remove();
+		// 		$('.day').find('.save').removeClass('save').addClass('remove');
+		// 		$('.day').find('.remove').next().addClass('hidden-print');
+		// 		remove();
+		// 		sortlist();
+		// 	} else {
+		// 		$(this).next().text('Save to personal list');
+		// 		var eventMonth = $(this).closest('.day-event').attr('date-month');
+		// 		var eventDay = $(this).closest('.day-event').attr('date-day');
+		// 		var eventNumber = $(this).closest('.day-event').attr('data-number');
+		// 		$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').slideUp('slow');
+		// 		setTimeout(function() {
+		// 			$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').remove();
+		// 		}, 1500);
+		// 	}
+		// });
 
-		function remove() {
-			$('.remove').click(function() {
-				if (this.checked) {
-					$(this).next().text('Remove from personal list');
-					var eventMonth = $(this).closest('.day').attr('date-month');
-					var eventDay = $(this).closest('.day').attr('date-day');
-					var eventNumber = $(this).closest('.day').attr('data-number');
-					$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').slideUp('slow');
-					$('.day-event[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').find('.save').attr('checked', false);
-					$('.day-event[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').find('span').text('Save to personal list');
-					setTimeout(function() {
-						$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').remove();
-					}, 1500);
-				}
-			});
-		}
+		// function remove() {
+		// 	$('.remove').click(function() {
+		// 		if (this.checked) {
+		// 			$(this).next().text('Remove from personal list');
+		// 			var eventMonth = $(this).closest('.day').attr('date-month');
+		// 			var eventDay = $(this).closest('.day').attr('date-day');
+		// 			var eventNumber = $(this).closest('.day').attr('data-number');
+		// 			$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').slideUp('slow');
+		// 			$('.day-event[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').find('.save').attr('checked', false);
+		// 			$('.day-event[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').find('span').text('Save to personal list');
+		// 			setTimeout(function() {
+		// 				$('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"][data-number="' + eventNumber + '"]').remove();
+		// 			}, 1500);
+		// 		}
+		// 	});
+		// }
 
 		/**
 		 * Sort personal list

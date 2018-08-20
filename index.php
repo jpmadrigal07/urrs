@@ -41,6 +41,8 @@ if (isset($_SESSION["userid"])) {
 
     <script src="dist/js/simplecalendar.js" type="text/javascript"></script>
 
+    <script src="dist/js/moment.js" type="text/javascript"></script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -76,6 +78,21 @@ if (isset($_SESSION["userid"])) {
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="calendar hidden-print">
+          <div class="date-options">
+            <input type="hidden" name="" id="month"> <input type="hidden" name="" id="day"> <input type="hidden" name="" id="year"> <input type="hidden" name="" id="wholedate">
+            <span style="float: right; font-size: 20px;"><a href="#" class="close">x</a></span>
+            <br><br>
+            <span id="date-selected" style="font-size: 25px;"></span>
+            <hr style="border-color: #aeb3b4;">
+            <div class="row">
+              <div class="col-md-6">
+                <button style="width: 100%" class="btn btn-default" onclick="showModalAddEvent();">Add Event</button>
+              </div>
+              <div class="col-md-6">
+                <button style="width: 100%" class="btn btn-default" onclick="showModalEventLists();">View Events</button>
+              </div>
+            </div>
+          </div>
           <div class="list">
           </div>
           <header>
@@ -99,6 +116,161 @@ if (isset($_SESSION["userid"])) {
       </div>
     </div>
   </div>
+
+  <!-- Modal -->
+    <div class="modal fade bd-example-modal-md" id="showAddEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Events</h5>
+          </div>
+          <div class="modal-body">
+            <form role="form" onsubmit="return false;">
+              <fieldset>
+                <span id="statusaddevent"></span>
+                <div class="form-group">
+                  <label>Booking Date</label>
+                  <input class="form-control" id="add-event-booking-date" name="email" type="text" disabled="disabled">
+                </div>
+                <div class="form-group">
+                  <label>Event Title</label>
+                  <input class="form-control" id="a" name="email" type="text" autofocus>
+                </div>
+                <div class="form-group">
+                  <label>Event Organizer</label>
+                  <input class="form-control" id="b" name="password" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Email Address</label>
+                  <input class="form-control" id="c" name="email" type="email">
+                </div>
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input class="form-control" id="d" name="password" type="text">
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">06:00 am - 07:00 am</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">07:00 am - 08:00 am</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">08:00 am - 09:00 am</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">09:00 am - 10:00 am</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">10:00 am - 11:00 am</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">11:00 am - 12:00 pm</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">12:00 pm - 01:00 pm</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">01:00 pm - 02:00 pm</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">02:00 pm - 03:00 pm</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">03:00 pm - 04:00 pm</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">04:00 pm - 05:00 pm</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">05:00 pm - 06:00 pm</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">06:00 pm - 07:00 pm</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">07:00 pm - 08:00 pm</label>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-success" id="addEventBtn" style="width: 100%;" onclick="showModalAddEvent();">Add</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="showEventLists" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Event Lists</h5>
+          </div>
+          <div class="modal-body">
+           <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Organize</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Research and Ddevelopment Conference</td>           
+                  <td>John Doe</td>
+                  <td>2018/6/2</td>
+                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
+                  <td>john@john.com</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Aquiantance Party</td>           
+                  <td>Adam Smith</td>
+                  <td>2018/6/3</td>
+                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
+                  <td>adam@admin.com</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>JS Prom Night</td>           
+                  <td>Jane Doe</td>
+                  <td>2018/6/4</td>
+                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
+                  <td>jane@jane.com</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Paint Exhibit</td>           
+                  <td>Smith Shock</td>
+                  <td>2018/6/5</td>
+                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
+                  <td>smith@smith.com</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Student Council Election</td>           
+                  <td>Tatum Channing</td>
+                  <td>2018/6/6</td>
+                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
+                  <td>tatum@tatum.com</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-danger" id="logBtn1" onclick="login1('1')">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade bd-example-modal-sm" id="showAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -207,6 +379,16 @@ if (isset($_SESSION["userid"])) {
 	            $('#showFaculty').modal('show');
 	        }
 	      }
+
+        function showModalAddEvent() {
+            $('#showAddEvent').modal('show');
+            var bookingdate = $('#wholedate').val();
+            $('#add-event-booking-date').val(bookingdate);
+        }
+
+        function showModalEventLists() {
+            $('#showEventLists').modal('show');
+        }
 
         function login1(l) {
           var u = _("ulog1").value;

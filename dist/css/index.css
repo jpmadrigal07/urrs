@@ -47,7 +47,7 @@ table {
 
 .calendar td {
     border: 2px solid transparent;
-    border-radius: 50%;
+    border-radius: 5px;
     height: 72px;
     line-height: 64px;
     text-align: center;
@@ -87,7 +87,7 @@ table {
 .btn-prev,
 .btn-next {
 	border: 2px solid #cbd1d2;
-	border-radius: 50%;
+	border-radius: 5px;
 	color: #cbd1d2;
 	height: 32px;
 	font-size: 22px;
@@ -116,13 +116,6 @@ table {
     margin-top: 20px;
 }
 
-.close {
-    color: #A4AAAB;
-    margin-top: -15px;
-    margin-right: 10px;
-    float: right;
-}
-
 .day-event {
     background-color: #F2F2F2 ;
     width: 100%;
@@ -130,7 +123,16 @@ table {
     padding-bottom: 0px;
     margin-bottom: 50px;
     display:none;
+}
 
+
+.date-options {
+    background-color: #cbd1d2;
+    width: 100%;
+    padding: 5px 20px 20px 20px;    
+    margin-bottom: 50px;
+    display:none;
+    border-radius: 5px;
 }
 
 .day-event p{
@@ -164,7 +166,6 @@ table {
 .check-btn {
     width: 100%;
 }
-input[type=checkbox] {display:none;}
 
 .print-btn {
     padding: 1px 14px 5px 14px;
