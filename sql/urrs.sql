@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2018 at 08:18 AM
+-- Generation Time: Aug 20, 2018 at 03:24 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -45,7 +45,9 @@ CREATE TABLE `urrs_user` (
 --
 
 INSERT INTO `urrs_user` (`id`, `user_username`, `user_pass`, `user_full_name`, `user_ip`, `user_date_created`, `user_last_login`, `user_level`, `user_status`) VALUES
-(1, 'admin', 'admin', 'Administrator', '1', '2018-08-06 00:00:00', '2018-08-06 14:00:04', 1, 1);
+(1, 'admin', 'admin', 'Administrator', '1', '2018-08-06 00:00:00', '2018-08-20 18:59:04', 1, 1),
+(2, 'student', 'student', 'Student', '1', '2018-08-06 00:00:00', '2018-08-20 21:23:37', 2, 1),
+(3, 'faculty', 'faculty', 'Faculty', '1', '2018-08-06 00:00:00', '2018-08-06 00:00:00', 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -65,7 +67,7 @@ ALTER TABLE `urrs_user`
 -- AUTO_INCREMENT for table `urrs_user`
 --
 ALTER TABLE `urrs_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
