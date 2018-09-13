@@ -1,10 +1,21 @@
 <?php
 include_once("include/loginstatus.php");
-// If user is already logged in
-if (isset($_SESSION["userid"])) {
-  header("location: account.php?id=".$_SESSION["userid"]."&dashboard=focus");
-  exit();
+
+// SELECT USER INFO
+$sql_user = "SELECT * FROM urrs_user WHERE id='$log_id' LIMIT 1";
+$user_query = mysqli_query($db_conn, $sql_user);
+while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
+  $id = $row["id"];
+  $fname = $row["user_full_name"];
+  $username = $row["user_username"];
+  $password = $row["user_pass"];
+  $ip = $row["user_ip"];
+  $datereg = $row["user_date_created"];
+  $lastlogin = $row["user_last_login"];
+  $level = $row["user_level"];
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -61,9 +72,23 @@ if (isset($_SESSION["userid"])) {
 	      <a class="navbar-brand" href="#">URRS</a>
 	    </div>
 	    <ul class="nav navbar-nav navbar-right">
-	      <li><a href="#" onclick="showModalLogin('1')">Admin</a></li>
-	      <li><a href="#" onclick="showModalLogin('2')">Student</a></li>
-	      <li><a href="#" onclick="showModalLogin('3')">Faculty</a></li>
+      <?php if (isset($_SESSION["userid"])) { ?>
+        <li><a href="account.php?id=<?php echo $log_id ?>&dashboard=focus">My Account</a></li>
+	      <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <?php echo $fname; ?> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
+          </ul>
+        </li>
+      <?php } else { ?>
+        <li><a href="#" onclick="showModalLogin('1')">Admin</a></li>
+        <li><a href="#" onclick="showModalLogin('2')">Student</a></li>
+        <li><a href="#" onclick="showModalLogin('3')">Faculty</a></li>
+        <li><a href="#">Register</a></li>
+      <?php } ?>
 	    </ul>
 	  </div>
 	</nav>
@@ -85,12 +110,18 @@ if (isset($_SESSION["userid"])) {
             <span id="date-selected" style="font-size: 25px;"></span>
             <hr style="border-color: #aeb3b4;">
             <div class="row">
+            <?php if (isset($_SESSION["userid"])) { ?>
               <div class="col-md-6">
                 <button style="width: 100%" class="btn btn-default" onclick="showModalAddEvent();">Add Event</button>
               </div>
               <div class="col-md-6">
                 <button style="width: 100%" class="btn btn-default" onclick="showModalEventLists();">View Events</button>
               </div>
+            <?php } else { ?>
+              <div class="col-md-12">
+                <button style="width: 100%" class="btn btn-default" onclick="showModalEventLists();">View Events</button>
+              </div>
+            <?php } ?>
             </div>
           </div>
           <div class="list">
@@ -266,7 +297,7 @@ if (isset($_SESSION["userid"])) {
           </div>
           </div>
           <div class="modal-footer">
-            <a class="btn btn-danger" id="logBtn1" onclick="login1('1')">Close</a>
+            <a class="btn btn-danger" id="logBtn1" data-dismiss="modal">Close</a>
           </div>
         </div>
       </div>
@@ -410,7 +441,7 @@ if (isset($_SESSION["userid"])) {
                   status.innerHTML = '<div style="color: red; margin-bottom: 10px;">This is not an admin account!</div>';
                   _("logBtn1").disabled = false;
                 } else {
-                  window.location = "account.php?id="+ajax.responseText+"&dashboard=focus";
+                  window.location = "index.php";
                 }
               }
             }
@@ -438,7 +469,7 @@ if (isset($_SESSION["userid"])) {
                   status.innerHTML = '<div style="color: red; margin-bottom: 10px;">This is not aa student account!</div>';
                   _("logBtn1").disabled = false;
                 } else {
-                  window.location = "account.php?id="+ajax.responseText+"&dashboard=focus";
+                  window.location = "index.php";
                 }
               }
             }
@@ -466,7 +497,7 @@ if (isset($_SESSION["userid"])) {
                   status.innerHTML = '<div style="color: red; margin-bottom: 10px;">This is not a faculty account!</div>';
                   _("logBtn1").disabled = false;
                 } else {
-                  window.location = "account.php?id="+ajax.responseText+"&dashboard=focus";
+                  window.location = "index.php";
                 }
               }
             }
