@@ -31,7 +31,7 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
 
     <title>URRS - Home</title>
 
-    <link rel="icon" type="image/png" href="image/logo.png" />
+    <link rel="icon" type="image/png" href="image/favicon.png" />
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -153,7 +153,7 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
       <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Events</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Event</h5>
           </div>
           <div class="modal-body">
             <form role="form" onsubmit="return false;">
@@ -164,68 +164,106 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
                   <input class="form-control" id="add-event-booking-date" name="email" type="text" disabled="disabled">
                 </div>
                 <div class="form-group">
+									<label class="control-label">Department</label>
+										<select class="form-control" id="add-event-department">
+											<option value=""></option>
+                      <?php
+                        $sql1 = "SELECT * FROM urrs_department WHERE 	department_status = '1'";
+                        $query1 = mysqli_query($db_conn, $sql1);
+                        while($row1 = mysqli_fetch_array($query1)) {  
+                            $rid = $row1["id"];
+                            $deptname = $row1["department_name"];
+
+                            echo '
+                            <option value="'.$rid.'">'.$deptname.'</option>
+                            ';
+                        }
+                      ?>
+										</select>
+								</div>
+                <div class="form-group" id="department-1" hidden="true">
+									<label class="control-label">Room</label>
+										<select class="form-control" id="add-event-room-department-1">
+											<option value=""></option>
+											<?php
+                        $sql2 = "SELECT * FROM urrs_room WHERE department_id='1' AND room_status = '1'";
+                        $query2 = mysqli_query($db_conn, $sql2);
+                        while($row2 = mysqli_fetch_array($query2)) {  
+                            $rid = $row2["id"];
+                            $roomname = $row2["room_name"];
+
+                            echo '
+                            <option value="'.$rid.'">'.$roomname.'</option>
+                            ';
+                        }
+                      ?>
+										</select>
+								</div>
+                <div class="form-group" id="department-2" hidden="true">
+									<label class="control-label">Room</label>
+										<select class="form-control" id="add-event-room-department-2">
+											<option value=""></option>
+											<?php
+                        $sql2 = "SELECT * FROM urrs_room WHERE department_id='2' AND room_status = '1'";
+                        $query2 = mysqli_query($db_conn, $sql2);
+                        while($row2 = mysqli_fetch_array($query2)) {  
+                            $rid = $row2["id"];
+                            $roomname = $row2["room_name"];
+
+                            echo '
+                            <option value="'.$rid.'">'.$roomname.'</option>
+                            ';
+                        }
+                      ?>
+										</select>
+								</div>
+                <div class="form-group" id="department-3" hidden="true">
+									<label class="control-label">Room</label>
+										<select class="form-control" id="add-event-room-department-3">
+											<option value=""></option>
+											<?php
+                        $sql2 = "SELECT * FROM urrs_room WHERE department_id='3' AND room_status = '1'";
+                        $query2 = mysqli_query($db_conn, $sql2);
+                        while($row2 = mysqli_fetch_array($query2)) {  
+                            $rid = $row2["id"];
+                            $roomname = $row2["room_name"];
+
+                            echo '
+                            <option value="'.$rid.'">'.$roomname.'</option>
+                            ';
+                        }
+                      ?>
+										</select>
+								</div>
+                <div class="form-group" hidden="true" id="fromtime">
+									<label class="control-label">From (Time)</label>
+											<span id="fromtimeselect"></span>
+								</div>
+                <div class="form-group" hidden="true" id="totime">
+									<label class="control-label">To (Time)</label>
+                      <span id="totimeselect"></span>
+								</div>
+                <div class="form-group">
                   <label>Event Title</label>
-                  <input class="form-control" id="a" name="email" type="text" autofocus>
+                  <input class="form-control" id="add-event-title" name="email" type="text" autofocus>
                 </div>
                 <div class="form-group">
                   <label>Event Organizer</label>
-                  <input class="form-control" id="b" name="password" type="text">
+                  <input class="form-control" id="add-event-organizer" name="passwor" type="text">
                 </div>
                 <div class="form-group">
                   <label>Email Address</label>
-                  <input class="form-control" id="c" name="email" type="email">
+                  <input class="form-control" id="add-event-email" name="email" type="email">
                 </div>
                 <div class="form-group">
                   <label>Phone Number</label>
-                  <input class="form-control" id="d" name="password" type="text">
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">06:00 am - 07:00 am</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">07:00 am - 08:00 am</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">08:00 am - 09:00 am</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">09:00 am - 10:00 am</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">10:00 am - 11:00 am</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">11:00 am - 12:00 pm</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">12:00 pm - 01:00 pm</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">01:00 pm - 02:00 pm</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">02:00 pm - 03:00 pm</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">03:00 pm - 04:00 pm</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">04:00 pm - 05:00 pm</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">05:00 pm - 06:00 pm</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">06:00 pm - 07:00 pm</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">07:00 pm - 08:00 pm</label>
+                  <input class="form-control" id="add-event-phone" name="password" type="text">
                 </div>
               </fieldset>
             </form>
           </div>
           <div class="modal-footer">
-            <a class="btn btn-success" id="addEventBtn" style="width: 100%;" onclick="showModalAddEvent();">Add</a>
+            <a class="btn btn-success" id="addEventBtn" style="width: 100%;" onclick="addEventRecord()">Add</a>
           </div>
         </div>
       </div>
@@ -233,68 +271,13 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
 
     <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="showEventLists" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-lg" style="width:1350px;" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Event Lists</h5>
           </div>
           <div class="modal-body">
-           <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Organize</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Research and Ddevelopment Conference</td>           
-                  <td>John Doe</td>
-                  <td>2018/6/2</td>
-                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                  <td>john@john.com</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Aquiantance Party</td>           
-                  <td>Adam Smith</td>
-                  <td>2018/6/3</td>
-                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                  <td>adam@admin.com</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>JS Prom Night</td>           
-                  <td>Jane Doe</td>
-                  <td>2018/6/4</td>
-                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                  <td>jane@jane.com</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Paint Exhibit</td>           
-                  <td>Smith Shock</td>
-                  <td>2018/6/5</td>
-                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                  <td>smith@smith.com</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Student Council Election</td>           
-                  <td>Tatum Channing</td>
-                  <td>2018/6/6</td>
-                  <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                  <td>tatum@tatum.com</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <span id="eventlists"></span>
           </div>
           <div class="modal-footer">
             <a class="btn btn-danger" id="logBtn1" data-dismiss="modal">Close</a>
@@ -304,7 +287,7 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
     </div>
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-sm" id="showAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-sm" id="showAdmin" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -315,23 +298,23 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
             	<fieldset>
             		<span id="statuslog1"></span>
             		<div class="form-group">
-            			<input class="form-control" placeholder="Username" id="ulog1" name="email" type="email" autofocus>
+            			<input class="form-control" placeholder="Username" id="ulog1" type="text" autofocus>
             		</div>
             		<div class="form-group">
-            			<input class="form-control" placeholder="Password" id="plog1" name="password" type="password" value="">
+            			<input class="form-control" placeholder="Password" id="plog1" type="password" value="">
             		</div>
-            	</fieldset>
-            </form>
           </div>
           <div class="modal-footer">
-            <a class="btn btn-primary" id="logBtn1" onclick="login1('1')">Login</a>
+            <button class="btn btn-primary" id="logBtn1" onclick="login1('1')">Login</button>
+            </fieldset>
+            </form>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-sm" id="showStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-sm" id="showStudent" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -342,23 +325,23 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
             	<fieldset>
             		<span id="statuslog2"></span>
             		<div class="form-group">
-            			<input class="form-control" placeholder="Username" id="ulog2" name="email" type="email" autofocus>
+            			<input class="form-control" placeholder="Username" id="ulog2" type="text" autofocus>
             		</div>
             		<div class="form-group">
-            			<input class="form-control" placeholder="Password" id="plog2" name="password" type="password" value="">
+            			<input class="form-control" placeholder="Password" id="plog2" type="password" value="">
             		</div>
-            	</fieldset>
-            </form>
           </div>
           <div class="modal-footer">
-            <a class="btn btn-primary" id="logBtn2" onclick="login2('2')">Login</a>
+            <button class="btn btn-primary" id="logBtn2" onclick="login2('2')">Login</button>
+            </fieldset>
+            </form>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade bd-example-modal-sm" id="showFaculty" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <!-- Modal -->
+   <div class="modal fade bd-example-modal-sm" id="showFaculty" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -369,16 +352,16 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
             	<fieldset>
             		<span id="statuslog3"></span>
             		<div class="form-group">
-            			<input class="form-control" placeholder="Username" id="ulog3" name="email" type="email" autofocus>
+            			<input class="form-control" placeholder="Username" id="ulog3" type="text" autofocus>
             		</div>
             		<div class="form-group">
-            			<input class="form-control" placeholder="Password" id="plog3" name="password" type="password" value="">
+            			<input class="form-control" placeholder="Password" id="plog3" type="password" value="">
             		</div>
-            	</fieldset>
-            </form>
           </div>
           <div class="modal-footer">
-            <a class="btn btn-primary" id="logBtn3" onclick="login3('3')">Login</a>
+            <button class="btn btn-primary" id="logBtn3" onclick="login3('3')">Login</button>
+            </fieldset>
+            </form>
           </div>
         </div>
       </div>
@@ -419,6 +402,7 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
 
         function showModalEventLists() {
             $('#showEventLists').modal('show');
+            generateEvents();
         }
 
         function login1(l) {
@@ -504,6 +488,131 @@ while ($row = mysqli_fetch_array($user_query, MYSQLI_ASSOC)) {
             ajax.send("u="+u+"&p="+p+"&l="+l);
           }
         }
+
+        $("#add-event-department").change(function () {
+            var filterValue = $("#add-event-department").val();
+            if (filterValue == "1") {
+                $("#department-1").show();
+                $("#department-2").hide();
+                $("#department-3").hide();
+            } else if (filterValue == "2") {
+                $("#department-1").hide();
+                $("#department-2").show();
+                $("#department-3").hide();
+            } else if (filterValue == "3") {
+                $("#department-1").hide();
+                $("#department-2").hide();
+                $("#department-3").show();
+            } else {
+               $("#department-1").hide();
+               $("#department-2").hide();
+               $("#department-3").hide();
+            }
+        }); 
+
+        $("#add-event-room-department-1,#add-event-room-department-2,#add-event-room-department-3").change(function () {
+            var filterValue1 = "";
+            if($("#add-event-room-department-1").val() != "" && $("#add-event-room-department-2").val() == "" && $("#add-event-room-department-3").val() == "") {
+              filterValue1 = $("#add-event-room-department-1").val();
+            } else if($("#add-event-room-department-1").val() == "" && $("#add-event-room-department-2").val() != "" && $("#add-event-room-department-3").val() == "") {
+              filterValue1 = $("#add-event-room-department-2").val();
+            } else if($("#add-event-room-department-1").val() == "" && $("#add-event-room-department-2").val() == "" && $("#add-event-room-department-3").val() != "") {
+              filterValue1 = $("#add-event-room-department-3").val();
+            }
+            var filterValue2 = $("#add-event-booking-date").val();
+
+            if(filterValue1 != "") {
+              $("#fromtime").show();
+              $("#totime").show();
+
+              $.ajax({ 
+                  url:"parsers/generatetimefromto.php",  
+                  method:"post",  
+                  data:{type:"1",roomid:filterValue1,bookdate:filterValue2},  
+                  dataType:"text",  
+                  success:function(data) {
+                      $('#fromtimeselect').html(data);
+                  }  
+              });
+
+              $.ajax({ 
+                  url:"parsers/generatetimefromto.php",  
+                  method:"post",  
+                  data:{type:"2",roomid:filterValue1,bookdate:filterValue2},  
+                  dataType:"text",  
+                  success:function(data) {
+                      $('#totimeselect').html(data);  
+                  }  
+              });
+            } else {
+              $("#fromtime").hide();
+              $("#totime").hide();
+            }
+
+        }); 
+
+      function addEventRecord() {
+        var bookingdate = _("add-event-booking-date").value;
+        var department = _("add-event-department").value;
+        var room = "";
+        if(_("add-event-room-department-1").value != "" && _("add-event-room-department-2").value == "" && _("add-event-room-department-3").value == "") {
+          room = _("add-event-room-department-1").value;
+        } else if(_("add-event-room-department-1").value == "" && _("add-event-room-department-2").value != "" && _("add-event-room-department-3").value == "") {
+          room = _("add-event-room-department-2").value;
+        } else if(_("add-event-room-department-1").value == "" && _("add-event-room-department-2").value == "" && _("add-event-room-department-3").value != "") {
+          room = _("add-event-room-department-3").value;
+        }
+        var title = _("add-event-title").value;
+        var organizer = _("add-event-organizer").value;
+        var email = _("add-event-email").value;
+        var phone = _("add-event-phone").value;
+        var load = '<center><i class="fa fa-circle-o-notch fa-spin" style="color: #999; margin-bottom: 10px;"></i><center>';
+        var error = '<div style="color: red; margin-bottom: 10px;">Incomplete Parameters.</div>';
+        var status = _("statusaddevent");
+        var button = _("addEventBtn");
+        status.innerHTML = load;
+        if (bookingdate == "" || department == "" || room == "" || title == "" || organizer == "" || email == "" || phone == "") {
+            status.innerHTML = error;
+        } else {
+            var from = _("add-event-from").value;
+            var to = _("add-event-to").value;
+            if (from == "" || to == "") {
+                status.innerHTML = error;
+            } else {
+            button.disabled = true;
+            status.innerHTML = load;
+            var ajax = ajaxObj("POST", "parsers/account.php");
+            ajax.onreadystatechange = function() {
+              if(ajaxReturn(ajax) == true) {
+                  if (ajax.responseText == "successinsert"){
+                      window.location = "index.php";
+                  } else if (ajax.responseText == "exist"){
+                      button.disabled = false;
+                      status.innerHTML = '<div style="color: red; margin-bottom: 10px;">Event is already exist!</div>';
+                  } else {
+                      button.disabled = false;
+                      status.innerHTML = '<div style="color: red; margin-bottom: 10px;">Unknown error! Error Details: '+ ajax.responseText +'</div>';
+                  }
+              }
+            }
+          ajax.send("addeventbookingdate="+bookingdate+"&addeventdepartment="+department+"&addeventroom="+room+"&addeventfrom="+from+"&addeventto="+to+"&addeventtitle="+title+"&addeventorganizer="+organizer+"&addeventemail="+email+"&addeventphone="+phone);
+        }
+        }
+      }
+      
+      function generateEvents() {
+        var date = $("#wholedate").val();
+        $.ajax({ 
+          url:"parsers/generateevents.php",  
+          method:"post",  
+          data:{bookdate:date},  
+          dataType:"text",  
+          success:function(data) {
+            $('#eventlists').html(data);  
+          }  
+        });
+      }
+        
     </script>
 
 </body>

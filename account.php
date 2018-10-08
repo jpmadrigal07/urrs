@@ -117,7 +117,7 @@ if(
 
     <title>URRS - Account</title>
 
-    <link rel="icon" type="image/png" href="image/logo.png" />
+    <link rel="icon" type="image/png" href="image/favicon.png" />
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -269,55 +269,122 @@ if(
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Title</th>
-                                            <th>Organize</th>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th>Email</th>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Organizer</th>
+                                        <th>Date</th>
+                                        <th>Department</th>
+                                        <th>Room</th>
+                                        <th>Time</th>
+                                        <th>Email</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Research and Ddevelopment Conference</td>           
-                                            <td>John Doe</td>
-                                            <td>2018/6/2</td>
-                                            <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                                            <td>john@john.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Aquiantance Party</td>           
-                                            <td>Adam Smith</td>
-                                            <td>2018/6/3</td>
-                                            <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                                            <td>adam@admin.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>JS Prom Night</td>           
-                                            <td>Jane Doe</td>
-                                            <td>2018/6/4</td>
-                                            <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                                            <td>jane@jane.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Paint Exhibit</td>           
-                                            <td>Smith Shock</td>
-                                            <td>2018/6/5</td>
-                                            <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                                            <td>smith@smith.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Student Council Election</td>           
-                                            <td>Tatum Channing</td>
-                                            <td>2018/6/6</td>
-                                            <td>11:00 am - 12:00 pm, 01:00 pm - 02:00pm</td>
-                                            <td>tatum@tatum.com</td>
-                                        </tr>
+                                        <?php
+                                        $sql = "SELECT * FROM urrs_event_booking WHERE user_id = '$log_id' AND event_booking_status = '1' ORDER BY id DESC";
+                                        $query = mysqli_query($db_conn, $sql);
+                                        $count = 0;
+                                        while($row = mysqli_fetch_array($query)) {
+                                            $count++;
+                                            $bookdate = $row["event_booking_date"];
+                                            $title = $row["event_booking_title"];
+                                            $department = $row["department_id"];
+                                            $room = $row["room_id"];
+                                            $organizer = $row["event_booking_organizer"];
+                                            $email = $row["event_booking_email"];
+                                            $totime = $row["event_booking_to_time"];
+                                            $fromtime = $row["event_booking_from_time"];
+
+                                            $bookdate1 = date("F d, Y", strtotime($bookdate));
+                                        
+                                            $fromtimetext = "";
+                                            if($fromtime == "1") {
+                                                $fromtimetext = "06:00 am";
+                                            } else if($fromtime == "2") {
+                                                $fromtimetext = "07:00 am";
+                                            } else if($fromtime == "3") {
+                                                $fromtimetext = "08:00 am";
+                                            } else if($fromtime == "4") {
+                                                $fromtimetext = "09:00 am";
+                                            } else if($fromtime == "5") {
+                                                $fromtimetext = "10:00 am";
+                                            } else if($fromtime == "6") {
+                                                $fromtimetext = "11:00 am";
+                                            } else if($fromtime == "7") {
+                                                $fromtimetext = "12:00 pm";
+                                            } else if($fromtime == "8") {
+                                                $fromtimetext = "01:00 pm";
+                                            } else if($fromtime == "9") {
+                                                $fromtimetext = "02:00 pm";
+                                            } else if($fromtime == "10") {
+                                                $fromtimetext = "03:00 pm";
+                                            } else if($fromtime == "11") {
+                                                $fromtimetext = "04:00 pm";
+                                            } else if($fromtime == "12") {
+                                                $fromtimetext = "05:00 pm";
+                                            } else if($fromtime == "13") {
+                                                $fromtimetext = "06:00 pm";
+                                            } else if($fromtime == "14") {
+                                                $fromtimetext = "07:00 pm";
+                                            }
+                                        
+                                            $totimetext = "";
+                                            if($totime == "1") {
+                                                $totimetext = "06:00 am";
+                                            } else if($totime == "2") {
+                                                $totimetext = "07:00 am";
+                                            } else if($totime == "3") {
+                                                $totimetext = "08:00 am";
+                                            } else if($totime == "4") {
+                                                $totimetext = "09:00 am";
+                                            } else if($totime == "5") {
+                                                $totimetext = "10:00 am";
+                                            } else if($totime == "6") {
+                                                $totimetext = "11:00 am";
+                                            } else if($totime == "7") {
+                                                $totimetext = "12:00 pm";
+                                            } else if($totime == "8") {
+                                                $totimetext = "01:00 pm";
+                                            } else if($totime == "9") {
+                                                $totimetext = "02:00 pm";
+                                            } else if($totime == "10") {
+                                                $totimetext = "03:00 pm";
+                                            } else if($totime == "11") {
+                                                $totimetext = "04:00 pm";
+                                            } else if($totime == "12") {
+                                                $totimetext = "05:00 pm";
+                                            } else if($totime == "13") {
+                                                $totimetext = "06:00 pm";
+                                            } else if($totime == "14") {
+                                                $totimetext = "07:00 pm";
+                                            }
+                                        
+                                            $sql1 = "SELECT * FROM urrs_department WHERE id='$department' AND department_status = '1'";
+                                            $query1 = mysqli_query($db_conn, $sql1);
+                                            while($row1 = mysqli_fetch_array($query1)) {  
+                                                $deptname = $row1["department_name"];
+                                            }
+                                        
+                                            $sql2 = "SELECT * FROM urrs_room WHERE id='$room' AND room_status = '1'";
+                                            $query2 = mysqli_query($db_conn, $sql2);
+                                            while($row2 = mysqli_fetch_array($query2)) {  
+                                                $roomname = $row2["room_name"];
+                                            }
+                                        
+                                            echo '
+                                            <tr>
+                                              <td>'.$count.'</td>
+                                              <td>'.$title.'</td>           
+                                              <td>'.$organizer.'</td>
+                                              <td>'.$bookdate1.'</td>
+                                              <td>'.$deptname.'</td>
+                                              <td>'.$roomname.'</td>
+                                              <td>'.$fromtimetext.' - '.$totimetext.'</td>
+                                              <td>'.$email.'</td>
+                                            </tr>
+                                            ';
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
