@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2018 at 03:25 PM
+-- Generation Time: Oct 08, 2018 at 03:34 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -75,7 +75,7 @@ CREATE TABLE `urrs_event_booking` (
 CREATE TABLE `urrs_room` (
   `id` int(11) NOT NULL,
   `department_id` int(11) NOT NULL,
-  `room_name` varchar(11) NOT NULL,
+  `room_name` varchar(255) NOT NULL,
   `room_date_created` datetime NOT NULL,
   `room_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -124,17 +124,19 @@ INSERT INTO `urrs_room` (`id`, `department_id`, `room_name`, `room_date_created`
 (37, 2, 'AV 105', '2018-10-08 00:00:00', 1),
 (38, 2, 'AV 106', '2018-10-08 00:00:00', 1),
 (39, 2, 'AV 107', '2018-10-08 00:00:00', 1),
-(40, 2, 'AV Hall (Au', '2018-10-08 00:00:00', 1),
-(41, 2, 'Conference ', '2018-10-08 00:00:00', 1),
-(42, 3, 'AL (Analyti', '2018-10-08 00:00:00', 1),
-(43, 3, 'CL (Compute', '2018-10-08 00:00:00', 1),
+(40, 2, 'AV Hall (Audio Visual Hall)', '2018-10-08 00:00:00', 1),
+(41, 2, 'Conference Room', '2018-10-08 00:00:00', 1),
+(42, 3, 'AL (Analytical Lab)', '2018-10-08 00:00:00', 1),
+(43, 3, 'CL (Computer Lab)', '2018-10-08 00:00:00', 1),
 (44, 3, 'EE Lab', '2018-10-08 00:00:00', 1),
-(45, 3, 'FPL (Food P', '2018-10-08 00:00:00', 1),
+(45, 3, 'FPL (Food Processing Lab)', '2018-10-08 00:00:00', 1),
 (46, 3, 'FRR', '2018-10-08 00:00:00', 1),
-(47, 3, 'Lecture Roo', '2018-10-08 00:00:00', 1),
-(48, 3, 'Lecture Roo', '2018-10-08 00:00:00', 1),
-(49, 3, 'Lecture Roo', '2018-10-08 00:00:00', 1),
-(50, 3, 'PF 5', '2018-10-08 00:00:00', 1);
+(47, 3, 'Lecture Room 1', '2018-10-08 00:00:00', 1),
+(48, 3, 'Lecture Room 2', '2018-10-08 00:00:00', 1),
+(49, 3, 'Lecture Room 3', '2018-10-08 00:00:00', 1),
+(50, 3, 'PF 5', '2018-10-08 00:00:00', 1),
+(51, 3, 'Research Room', '2018-10-08 00:00:00', 1),
+(52, 3, 'Micro Lab', '2018-10-08 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -211,7 +213,7 @@ ALTER TABLE `urrs_event_booking`
 -- AUTO_INCREMENT for table `urrs_room`
 --
 ALTER TABLE `urrs_room`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `urrs_user`
