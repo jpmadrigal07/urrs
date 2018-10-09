@@ -41,6 +41,9 @@ if ($check > 0) {
 
     // echoing JSON response
     echo json_encode($response, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+} else {
+    $response["events"] = array();
+    echo json_encode($response, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 }
 
 ?>
